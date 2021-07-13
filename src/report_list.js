@@ -1,6 +1,6 @@
-{
+export default reports = {
   "reports": {
-    "current_index": 2
+    "current_index": 2,
     "1": {
       "id": "string",
       "trail": "string",

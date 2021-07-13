@@ -1,4 +1,4 @@
-{
+export default {
   "wheaton regional": {
     "address": "2000 Shorefield Road, Wheaton, Maryland 20902",
     "phone": "3014952595",

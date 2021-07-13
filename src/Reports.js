@@ -1,44 +1,4 @@
 import Component from "react";
-import StormDB from "stormdb";
-
-const getReportsDb = () => {
-  const reportsEngine = new StormDB.localFileEngine("./db/reports.stormdb");
-  const rdatabase = new StormDB(reportsEngine);
-
-  rdatabase.default({ reports: {} });
-  const reports = rdatabase.get("reports");
-
-  return reports;
-};
-
-function generateReportId() {
-  // do stuff to create a unique id
-  return "hi";
-}
-
-function getSelectedTrail(reportObject) {
-  return "trail";
-}
-
-function getReportDescription(reportObject) {
-  return "descrip";
-}
-
-function getTrailIssues(reportObject) {
-  return "issues";
-}
-
-function getImmediateMaintenanceBoolean(reportObject) {
-  return false;
-}
-
-function getOverallSafety(reportObject) {
-  return 0;
-}
-
-function getRating(reportObject) {
-  return 0;
-}
 
 /*
 // a database adapter for trails.json

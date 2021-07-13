@@ -1,25 +1,19 @@
-import StormDB, { localFileEngine } from "stormdb";
-
-const getTrailsDB = () => {
-  const trailsEngine = new localFileEngine("./db/trails.stormdb");
-  const tdatabase = new StormDB(trailsEngine);
-  const wheaton_regional = tdatabase.get("wheaton regional");
-  const trails = wheaton_regional.get("trails").value();
-  return trails;
-};
-
-const trails = getTrailsDB();
-trails.names = Object.keys(trails);
+import React from "react"
+import trails_list from "./trails_list";
+import { Component } from "react";
 
 class TrailListing extends Component {
   constructor() {
+    super();
+    const trailNames = Object.keys(trails_list["wheaton regional"].trails);
+
     let tmpwebsite =
       "https://www.montgomeryparks.org/parks-and-trails/wheaton-regional-park/";
 
-    const t = trails.names;
+    const t = trailNames;
     const list = [];
 
-    list.push("<ul>")
+    list.push("<ul>");
 
     t.forEach((item) => {
       list.push(
@@ -29,8 +23,8 @@ class TrailListing extends Component {
       );
     });
 
-    list.push("</ul>")
+    list.push("</ul>");
   }
-  
-  render() { return list.join('') }
 }
+
+export default TrailListing;
