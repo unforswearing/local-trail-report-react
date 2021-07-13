@@ -1,4 +1,4 @@
-export default {
+const trails_list = {
   "wheaton regional": {
     "address": "2000 Shorefield Road, Wheaton, Maryland 20902",
     "phone": "3014952595",
@@ -49,3 +49,5 @@ export default {
     }
   }
 }
+
+export default trails_list

@@ -1,6 +1,5 @@
 import logo from "./logo.svg";
 import { React, Component } from "react";
-import trails from "./Trails";
 import "./App.css";
 
 class Navigation extends Component {
