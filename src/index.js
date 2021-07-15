@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Component } from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 // import trails_list from "./trails_list"
 import "./index.css";
 
@@ -63,19 +64,57 @@ const trails_list = {
         ))}
         */
 
+function Navigation() {
+  return (
+    <Router>
+      <div>
+        <nav style={{ height: "10vh" }}>
+          <div>
+            <Link to="/trails">
+              <button style={{ float: "left" }}>Trails</button>
+            </Link>
+            <Link to="/reports">
+              <button style={{ float: "left" }}>Reports</button>
+            </Link>
+            <Link to="/about">
+              <button style={{ float: "left" }}>About</button>
+            </Link>
+          </div>
+        </nav>
+        <Switch>
+          <Route path="/trails">
+            <TrailsIndex />
+          </Route>
+          <Route path="/reports">
+            <ReportsIndex />
+          </Route>
+          <Route path="/about">
+            <AboutIndex />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
+  );
+}
+
+function formattedTrailsList() {
+
+}
+
 function TrailSelector() {
   const trail_names = Object.keys(trails_list["wheaton regional"].trails);
   return (
     <div>
-      <label for="trails">Select a Trail</label><br/>
+      <label for="trails">Select a Trail</label>
+      <br />
       <select name="trails" className="trails">
-      <option value="acorn woods">acorn woods</option>
-      <option value="arcola">arcola</option>
-      <option value="deer hollow">deer hollow</option>
-      <option value="oak ridge">oak ridge</option>
-      <option value="pine lake">pine lake</option>
-      <option value="tom's trail">tom's trail</option>
-      <option value="wheaton loop">tom's trail</option>
+        <option value="acorn woods">acorn woods</option>
+        <option value="arcola">arcola</option>
+        <option value="deer hollow">deer hollow</option>
+        <option value="oak ridge">oak ridge</option>
+        <option value="pine lake">pine lake</option>
+        <option value="tom's trail">tom's trail</option>
+        <option value="wheaton loop">tom's trail</option>
       </select>
     </div>
   );
@@ -98,43 +137,54 @@ function TrailRating() {
   );
 }
 
-class HeaderNav extends Component {
-  render() {
-    return (
-      <div>
-        <nav>
-          <span>Wheaton Trail Reports</span>
-          <ul>
-            <li>Trails</li>
-            <li>Reports</li>
-            <li>About</li>
-          </ul>
-        </nav>
-        <main>
-          <div>
+function ReportsIndex() {
+  return (
+    <div style={{ width: "75%", paddingTop: "10px" }}>
+      <h1 style={{ float: "left", top: "30px" }}>Wheaton Trail Reports</h1>
+      <br />
+      <br />
+      <br />
+      <br />
+      <Navigation />
+      <main>
+        <div>
+          <details>
+            <summary>Submit a report</summary>
+            <p></p>
             <TrailSelector />
+            <p></p>
+            <p></p>
             <form>
               Select Date
               <input type="datetime-local" />
-              <br />
+              <p></p>
               Trail Conditions
-              <input type="text" />
-              <br />
+              <textArea />
+              <p></p>
               Trail Hazards
-              <input type="text" />
-              <br />
+              <textArea />
+              <p></p>
               Needed Maintenance
-              <input type="text" />
-              <br />
-              Rate Trail
+              <textArea />
+              <p></p>
+              Overall Trail Quality
               <TrailRating />
-              <br />
+              <p></p>
             </form>
-          </div>
-        </main>
-      </div>
-    );
-  }
+          </details>
+        </div>
+      </main>
+    </div>
+  );
 }
 
-ReactDOM.render(<HeaderNav />, document.getElementById("root"));
+function TrailsIndex() {
+  // <formattedTrailsList>
+  return <h1>Trails</h1>;
+}
+
+function AboutIndex() {
+  return <h1>About</h1>;
+}
+
+ReactDOM.render(<ReportsIndex />, document.getElementById("root"));
