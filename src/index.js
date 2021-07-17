@@ -79,16 +79,16 @@ function Navigation() {
             <Link exact="" to="/">
               <button style={{ float: "left" }}>Home</button>
             </Link>
-            <Link to="/reports">
-              <button style={{ float: "left" }}>Reports</button>
+            <Link to="/submit">
+              <button style={{ float: "left" }}>Submit</button>
             </Link>
           </nav>
           <Switch>
             <Route exact="" path="/">
               <Index />
             </Route>
-            <Route path="/reports">
-              <ReportsIndex />
+            <Route path="/submit">
+              <SubmitIndex />
             </Route>
           </Switch>
         </div>
@@ -99,7 +99,9 @@ function Navigation() {
 
 function formattedTrailsList() {}
 
-function ReportsIndex() {
+function ViewIndex() {}
+
+function SubmitIndex() {
   function TrailSelector() {
     return (
       <div>
@@ -121,16 +123,21 @@ function ReportsIndex() {
   function TrailRating() {
     return (
       <div>
-        <input type="radio" name="rating" value="0"></input>
-        <label for="0">0</label>
-        <input type="radio" name="rating" value="1"></input>
-        <label for="1">1</label>
-        <input type="radio" name="rating" value="2"></input>
-        <label for="2">2</label>
-        <input type="radio" name="rating" value="3"></input>
-        <label for="3">3</label>
-        <input type="radio" name="rating" value="4"></input>
-        <label for="4">4</label>
+        <input type="radio" name="overall" value="0"></input>
+        <label for="0">0 - Bad Condition / Inaccessible</label>
+        <br />
+        <input type="radio" name="overall" value="1"></input>
+        <label for="1">1 - Poor Condition / Dangerous</label>
+        <br />
+        <input type="radio" name="overall" value="2"></input>
+        <label for="2">2 - Good Condition</label>
+        <br />
+        <input type="radio" name="overall" value="3"></input>
+        <label for="3">3 - Great Condition</label>
+        <br />
+        <input type="radio" name="overall" value="4"></input>
+        <label for="4">4 - Excellent Condition</label>
+        <br />
       </div>
     );
   }
@@ -141,32 +148,32 @@ function ReportsIndex() {
       <h2>Submit a Trail Report</h2>
       You are welcome to submit a trail report for others to view. Click "Submit
       a report" below to begin your report.
-      <details style={{ backgroundColor: "white" }}>
-        <summary>Submit a report</summary>
+      <br />
+      <br />
+      <TrailSelector />
+      <p></p>
+      <p></p>
+      <form action="">
+        Select Date
+        <input name="date" type="datetime-local" />
         <p></p>
-        <TrailSelector />
+        Trail Conditions
+        <textArea name="conditions" />
+        <p></p>
+        Trail Hazards
+        <textArea name="hazards" />
+        <p></p>
+        Needed Maintenance
+        <textArea name="maintenance" />
+        <p></p>
+        Overall Trail Quality
+        <TrailRating />
         <p></p>
         <p></p>
-        <form>
-          Select Date
-          <input type="datetime-local" />
-          <p></p>
-          Trail Conditions
-          <textArea />
-          <p></p>
-          Trail Hazards
-          <textArea />
-          <p></p>
-          Needed Maintenance
-          <textArea />
-          <p></p>
-          Overall Trail Quality
-          <TrailRating />
-          <p></p>
-          <p></p>
-          <input type="submit"></input>
-        </form>
-      </details>
+        <input type="submit"></input>
+      </form>
+      <br />
+      <br />
     </div>
   );
 }
@@ -191,7 +198,12 @@ function Index() {
         Wheaton Regional park contains the following trails:
         <br />
         <br />
-        {Object.keys(trails_list["wheaton regional"].trails).map((name) => <div>{name}<br /></div>)}
+        {Object.keys(trails_list["wheaton regional"].trails).map((name) => (
+          <div>
+            {name}
+            <br />
+          </div>
+        ))}
         <br />
         <br />
         <h2>More Information</h2>
