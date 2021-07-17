@@ -4,6 +4,7 @@ import ReactDOM from "react-dom";
 import {
   BrowserRouter as HashRouter,
   Switch,
+  IndexRoute,
   Route,
   Link,
 } from "react-router-dom";
@@ -64,10 +65,10 @@ const trails_list = {
 };
 
 /*
-        {trail_names.forEach((trail) => (
-          <option value={trail}>{trail}</option>
-        ))}
-        */
+{trail_names.forEach((trail) => (
+  <option value={trail}>{trail}</option>
+))}
+*/
 
 function Navigation() {
   return (
@@ -75,28 +76,19 @@ function Navigation() {
       <HashRouter>
         <div>
           <nav style={{ height: "10vh" }}>
-            <Link to="/">
+            <Link exact="" to="/">
               <button style={{ float: "left" }}>Home</button>
-            </Link>
-            <Link to="/trails">
-              <button style={{ float: "left" }}>Trails</button>
             </Link>
             <Link to="/reports">
               <button style={{ float: "left" }}>Reports</button>
             </Link>
-            <Link to="/about">
-              <button style={{ float: "left" }}>About</button>
-            </Link>
           </nav>
           <Switch>
-            <Route path="/trails">
-              <TrailsIndex />
+            <Route exact="" path="/">
+              <Index />
             </Route>
             <Route path="/reports">
               <ReportsIndex />
-            </Route>
-            <Route path="/about">
-              <AboutIndex />
             </Route>
           </Switch>
         </div>
@@ -179,29 +171,37 @@ function ReportsIndex() {
   );
 }
 
-function TrailsIndex() {
-  // <formattedTrailsList>
-  return (
-    <div>
-      <h1>Wheaton Trail Reports</h1>
-      <div>Trails</div>
-    </div>
-  );
-}
-
-function AboutIndex() {
+function Index() {
   return (
     <div>
       <h1>Wheaton Trail Reports</h1>
       <div>
         <h1>About</h1>
-        <strong>Address:  </strong>
+        Wheaton Regional Park is located in Wheaton, Maryland. The park spans
+        almost 540 acres and is home to botanical gardens, a nature center, and
+        several hiking trails that feature various plant species native to the
+        area. Open sunrise to sunset.
+        <br />
+        <br />
+        This site allows you to submit a general trail report by answering a few
+        basic questions. Please see the "Reports" section of this site for more
+        details.
+        <br />
+        <br />
+        Wheaton Regional park contains the following trails:
+        <br />
+        <br />
+        {Object.keys(trails_list["wheaton regional"].trails).map((name) => <div>{name}<br /></div>)}
+        <br />
+        <br />
+        <h2>More Information</h2>
+        <strong>Address: </strong>
         {trails_list["wheaton regional"].address}
         <br />
-        <strong>Phone:    </strong>
+        <strong>Phone: </strong>
         {trails_list["wheaton regional"].phone}
         <br />
-        <strong>Web:      </strong>
+        <strong>Web: </strong>
         <a href={trails_list["wheaton regional"].website}>
           {trails_list["wheaton regional"].website}
         </a>
