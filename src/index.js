@@ -18,43 +18,43 @@ const trails_list = {
     website:
       "https://www.montgomeryparks.org/parks-and-trails/wheaton-regional-park/",
     trails: {
-      "acorn woods": {
+      "Acorn Woods": {
         id: 1,
         plus_code_trailhead: "3X5C+9G",
         trail_length: 0.8,
         difficulty: "easy",
       },
-      arcola: {
+      Arcola: {
         id: 2,
         plus_code_trailhead: "3X59+M2",
         distance: 0.7,
         difficulty: "easy",
       },
-      "deer hollow": {
+      "Deer Hollow": {
         id: 3,
         plus_code_trailhead: "3X47+8C",
         trail_length: 1.6,
         difficulty: "easy",
       },
-      "oak ridge": {
+      "Oak Ridge": {
         id: 4,
         plus_code_trailhead: "3X47+8C",
         trail_length: 0.1,
         difficulty: "easy",
       },
-      "pine lake": {
+      "Pine Lake": {
         id: 5,
         plus_code_trailhead: "3X58+79",
         trail_length: 0.3,
         difficulty: "easy",
       },
-      "tom's trail": {
+      "Tom's Trail": {
         id: 6,
         plus_code_trailhead: "3X58+79",
         trail_length: 0.3,
         difficulty: "intermediate",
       },
-      "wheaton loop": {
+      "Wheaton Loop": {
         id: 7,
         plus_code_trailhead: "3X59+VQ",
         trail_length: 1.6,
@@ -82,6 +82,9 @@ function Navigation() {
             <Link to="/submit">
               <button style={{ float: "left" }}>Submit</button>
             </Link>
+            <Link to="/view">
+              <button style={{ float: "left" }}>View</button>
+            </Link>
           </nav>
           <Switch>
             <Route exact="" path="/">
@@ -90,6 +93,12 @@ function Navigation() {
             <Route path="/submit">
               <SubmitIndex />
             </Route>
+            <Route path="/view">
+              <ViewIndex />
+            </Route>
+            <Route path="/process">
+              <ProcessIndex />
+            </Route>
           </Switch>
         </div>
       </HashRouter>
@@ -97,9 +106,14 @@ function Navigation() {
   );
 }
 
-function formattedTrailsList() {}
-
-function ViewIndex() {}
+function ViewIndex() {
+  return (
+    <div>
+      <h1>Wheaton Trail Reports</h1>
+      <h2>View Reports</h2>
+    </div>
+  );
+}
 
 function SubmitIndex() {
   function TrailSelector() {
@@ -113,7 +127,7 @@ function SubmitIndex() {
           <option value="deer hollow">Deer Hollow</option>
           <option value="oak ridge">Oak Ridge</option>
           <option value="pine lake">Pine Lake</option>
-          <option value="tom's trail">Tom'S Trail</option>
+          <option value="tom's trail">Tom's Trail</option>
           <option value="wheaton loop">Wheaton Loop</option>
         </select>
       </div>
@@ -153,7 +167,7 @@ function SubmitIndex() {
       <TrailSelector />
       <p></p>
       <p></p>
-      <form action="">
+      <form action="/process">
         Select Date
         <input name="date" type="datetime-local" />
         <p></p>
@@ -178,12 +192,30 @@ function SubmitIndex() {
   );
 }
 
+function ProcessIndex() {
+  function reportObject(props) {
+    // https://stackoverflow.com/a/901144/3148350
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const params = Object.fromEntries(urlSearchParams.entries());
+    // this.submission = params;
+    return params;
+  }
+  const r = reportObject();
+  let res
+  if (r.date) {
+    res = <div>{r}</div>;
+  } else {
+    res = <pre>404</pre>
+  }
+  return res
+}
+
 function Index() {
   return (
     <div>
       <h1>Wheaton Trail Reports</h1>
       <div>
-        <h1>About</h1>
+        <h2>About</h2>
         Wheaton Regional Park is located in Wheaton, Maryland. The park spans
         almost 540 acres and is home to botanical gardens, a nature center, and
         several hiking trails that feature various plant species native to the
@@ -200,8 +232,11 @@ function Index() {
         <br />
         {Object.keys(trails_list["wheaton regional"].trails).map((name) => (
           <div>
-            {name}
-            <br />
+            <li>
+              {name} (length:{" "}
+              {trails_list["wheaton regional"].trails[name].trail_length || 0}{" "}
+              mi.)
+            </li>
           </div>
         ))}
         <br />
