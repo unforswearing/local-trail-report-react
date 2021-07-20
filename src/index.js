@@ -4,7 +4,6 @@ import ReactDOM from "react-dom";
 import {
   BrowserRouter as HashRouter,
   Switch,
-  IndexRoute,
   Route,
   Link,
 } from "react-router-dom";
