@@ -1,6 +1,9 @@
 {
   "name": "local-trail-report-react",
   "version": "0.1.0",
+  "engines": {
+    "node": ">=50.9"
+  },
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
